@@ -47,7 +47,7 @@ end
 % --- Executes just before APP_GUI is made visible.
 function APP_GUI_OpeningFcn(hObject, eventdata, handles, varargin)
 
-global Ease_Dang
+global Ease_Dang %The position of the correct or error judge of the easy dangerous pic
 Ease_Dang=[];
 global Diff_Dang
 Diff_Dang=[]
@@ -55,7 +55,7 @@ global Ease_Safe
 Ease_Safe=[];
 global Diff_Safe
 Diff_Safe=[]
-global count_diff_dang
+global count_diff_dang     %Count the number of difficult dangerous pic appeared
 global count_ease_dang
 global count_diff_safe
 global count_ease_safe
@@ -67,25 +67,25 @@ count_diff_safe=0
 count_ease_safe=0
 count_error=0
 
-file_path = uigetdir('*.*','ÇëÑ¡ÔñÎÄ¼ş¼Ğ');
+file_path = uigetdir('*.*','è¯·é€‰æ‹©æ–‡ä»¶å¤¹');
 file_path=strcat(file_path,'\');
 
 global file
 file=file_path;
 
 global img_path_list 
-img_path_list= dir(strcat(file_path,'*.jpg'));%»ñÈ¡¸ÃÎÄ¼ş¼ĞÖĞËùÓĞjpg¸ñÊ½µÄÍ¼Ïñ
+img_path_list= dir(strcat(file_path,'*.jpg'));%è·å–è¯¥æ–‡ä»¶å¤¹ä¸­æ‰€æœ‰jpgæ ¼å¼çš„å›¾åƒ
 
 global img_num
-img_num = length(img_path_list);%»ñÈ¡Í¼Ïñ×ÜÊıÁ¿
+img_num = length(img_path_list);%è·å–å›¾åƒæ€»æ•°é‡
 
 global j
 j=1;
 
-if img_num > 0 %ÓĞÂú×ãÌõ¼şµÄÍ¼Ïñ
+if img_num > 0 %æœ‰æ»¡è¶³æ¡ä»¶çš„å›¾åƒ
  
-            image_name = img_path_list(j).name;% Í¼ÏñÃû
-            image =  imread(strcat(file,image_name));%¶ÁÈ¡Í¼Ïñ
+            image_name = img_path_list(j).name;% å›¾åƒå
+            image =  imread(strcat(file,image_name));%è¯»å–å›¾åƒ
             axes1=image;
             imshow(axes1);
             
@@ -135,10 +135,10 @@ global count_error
 
 pick= unidrnd(img_num)
 
-if img_num > 0 %ÓĞÂú×ãÌõ¼şµÄÍ¼Ïñ
+if img_num > 0 %æœ‰æ»¡è¶³æ¡ä»¶çš„å›¾åƒ
  
-            image_name = img_path_list(pick).name;% Í¼ÏñÃû
-            image =  imread(strcat(file,image_name));%¶ÁÈ¡Í¼Ïñ
+            image_name = img_path_list(pick).name;% å›¾åƒå
+            image =  imread(strcat(file,image_name));%è¯»å–å›¾åƒ
             axes1=image;
             imshow(axes1);
             
@@ -147,14 +147,14 @@ if img_num > 0 %ÓĞÂú×ãÌõ¼şµÄÍ¼Ïñ
             cell_str = strsplit(image_name,'_'); 
             judge=str2num(cell_str{1,1}(1))
          if j>1   
-            if judge==1 
-                Diff_Dang(j-2)=1;
+            if judge==1                     %if user judge it is dangerous
+                Diff_Dang(j-2)=1;           %this pic is difficult to judge
                 Ease_Dang(j-2)=0;
                  Ease_Safe(j-2)=0;
                  Diff_Safe(j-2)=0;                
                 count_diff_dang=count_diff_dang+1;
-            elseif judge==2
-                 Ease_Dang(j-2)=1;
+            elseif judge==2                 %if user judge it is dangerous
+                 Ease_Dang(j-2)=1;          %this pic is easy to judge
                  Diff_Dang(j-2)=0;
                  Ease_Safe(j-2)=0;
                  Diff_Safe(j-2)=0;                 
@@ -167,7 +167,7 @@ if img_num > 0 %ÓĞÂú×ãÌõ¼şµÄÍ¼Ïñ
                  count_error=count_error+1
             end
          end
-         assignin('base','Diff_Dang',Diff_Dang)
+         assignin('base','Diff_Dang',Diff_Dang)    %Show the judge detail in work place
          assignin('base','Ease_Dang',Ease_Dang)
          assignin('base','Diff_Safe',Diff_Safe)
          assignin('base','Ease_Safe',Ease_Safe)        
@@ -175,7 +175,7 @@ end
 
  
 
-% [filename pathname] =uigetfile({'*.jpg';'*.png';'*.*'},'´ò¿ªÍ¼Æ¬');
+% [filename pathname] =uigetfile({'*.jpg';'*.png';'*.*'},'æ‰“å¼€å›¾ç‰‡');
 
 
 % hObject    handle to pushbutton1 (see GCBO)
@@ -215,10 +215,10 @@ global count_ease_safe
 
 global count_error
 pick= unidrnd(img_num)
-if img_num > 0 %ÓĞÂú×ãÌõ¼şµÄÍ¼Ïñ
+if img_num > 0 %æœ‰æ»¡è¶³æ¡ä»¶çš„å›¾åƒ
  
-            image_name = img_path_list(pick).name;% Í¼ÏñÃû
-            image =  imread(strcat(file,image_name));%¶ÁÈ¡Í¼Ïñ
+            image_name = img_path_list(pick).name;% å›¾åƒå
+            image =  imread(strcat(file,image_name));%è¯»å–å›¾åƒ
             axes1=image;
             imshow(axes1);
             
@@ -262,10 +262,10 @@ global count_diff_dang
 global count_ease_dang
 global count_diff_safe
 global count_ease_safe
-global count_error
+global count_error                              %the number user judge error
 
-error_rate=count_error/(j-2);
-a=['Error Rate£º' num2str(error_rate)]
+error_rate=count_error/(j-2);               %show error rate
+a=['Error Rateï¼š' num2str(error_rate)]
 set(handles.edit2,'string',a);
 
 
@@ -297,11 +297,11 @@ set(handles.edit2,'string',a);
 %         count_error=count_error+1;
 %     end
 % end
-% txt_diff_dang=['ÕıÈ·¼ì²â³öµÄÎ£ÏÕÆ·£¨ÄÑ£©ÊıÁ¿£º' num2str(count_diff_dang)];
-% txt_ease_dang=['ÕıÈ·¼ì²â³öµÄÎ£ÏÕÆ·£¨Ò×£©ÊıÁ¿£º' num2str(count_ease_dang)];
-% txt_diff_safe=['ÕıÈ·¼ì²â³öµÄ°²È«Æ·£¨ÄÑ£©ÊıÁ¿£º' num2str(count_diff_safe)];
-% txt_ease_safe=['ÕıÈ·¼ì²â³öµÄ°²È«Æ·£¨Ò×£©ÊıÁ¿£º' num2str(count_ease_safe)];
-% txt_error=['¼ì²â´íÎóµÄÊıÁ¿£º' num2str(count_diff_dang)]
+% txt_diff_dang=['æ­£ç¡®æ£€æµ‹å‡ºçš„å±é™©å“ï¼ˆéš¾ï¼‰æ•°é‡ï¼š' num2str(count_diff_dang)];
+% txt_ease_dang=['æ­£ç¡®æ£€æµ‹å‡ºçš„å±é™©å“ï¼ˆæ˜“ï¼‰æ•°é‡ï¼š' num2str(count_ease_dang)];
+% txt_diff_safe=['æ­£ç¡®æ£€æµ‹å‡ºçš„å®‰å…¨å“ï¼ˆéš¾ï¼‰æ•°é‡ï¼š' num2str(count_diff_safe)];
+% txt_ease_safe=['æ­£ç¡®æ£€æµ‹å‡ºçš„å®‰å…¨å“ï¼ˆæ˜“ï¼‰æ•°é‡ï¼š' num2str(count_ease_safe)];
+% txt_error=['æ£€æµ‹é”™è¯¯çš„æ•°é‡ï¼š' num2str(count_diff_dang)]
 
 
 
